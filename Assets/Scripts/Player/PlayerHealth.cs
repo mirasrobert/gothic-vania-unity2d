@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= damage;
 
-        healthText.text = currentHealth.ToString();
+        healthText.text = Mathf.Clamp(currentHealth, 0, 100).ToString();
 
         // Play Hurt Animation
         animator.SetTrigger("Hurt");

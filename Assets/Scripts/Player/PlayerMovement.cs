@@ -20,10 +20,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheckLeft;
     [SerializeField] Transform groundCheckRight;
 
+    // Knockback
+    public float KBForceY;
+    public float KBForceX;
+    public float KBCounter;
+    public float KBTotalTime;
 
-    const string PLAYER_IDLE_ANIM = "Player_Idle";
-    const string PLAYER_RUN_ANIM = "Player_Run";
-    const string PLAYER_JUMP_ANIM = "Player_Jump";
+    public bool KnockFromRight;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +61,26 @@ public class PlayerMovement : MonoBehaviour
         }
 
         horizontalInput = Input.GetAxisRaw("Horizontal"); // Player Controller [A & D Keyboard]
-        rb2d.velocity = new Vector2(horizontalInput * speed * Time.fixedDeltaTime, rb2d.velocity.y); // Player Move
+
+        if(KBCounter <= 0)
+        {
+            rb2d.velocity = new Vector2(horizontalInput * speed * Time.fixedDeltaTime, rb2d.velocity.y); // Player Move
+        } else
+        {
+            if(KnockFromRight = true)
+            {
+                rb2d.velocity = new Vector2(-KBForceX, KBForceY);
+            }
+
+            if(KnockFromRight == false)
+            {
+                rb2d.velocity = new Vector2(KBForceX, KBForceY);
+
+            }
+
+            KBCounter -= Time.deltaTime;
+
+        }
 
         FlipPlayer();
 

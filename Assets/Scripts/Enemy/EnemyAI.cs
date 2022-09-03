@@ -10,13 +10,13 @@ public class EnemyAI : MonoBehaviour
     string facingDirection;
 
     [SerializeField] Transform castPos;
-    [SerializeField] float baseCaseDistance;
+    [SerializeField] float baseCaseDistance = 0.5f;
 
     private Vector3 baseScale;
 
     [SerializeField] Transform player;
 
-    [SerializeField] float agroRange = 0f;
+    [SerializeField] float agroRange = 2f;
 
     [SerializeField] float moveSpeed = 3f;
 
@@ -74,8 +74,6 @@ public class EnemyAI : MonoBehaviour
         else
         {
             // Stop Chasing the player and do something
-            animator.SetBool("IsRunning", true);
-
             // Movement speed of the gameobject
             rb.velocity = new Vector2(moveX, rb.velocity.y);
 
@@ -122,7 +120,6 @@ public class EnemyAI : MonoBehaviour
     void ChasePlayer(Vector2 newPos)
     {
         LookAtPlayer();
-        animator.SetBool("IsRunning", true);
 
         // Chase the player
         rb.MovePosition(newPos);
