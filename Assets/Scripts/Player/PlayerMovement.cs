@@ -65,9 +65,15 @@ public class PlayerMovement : MonoBehaviour
         if(KBCounter <= 0)
         {
             rb2d.velocity = new Vector2(horizontalInput * speed * Time.fixedDeltaTime, rb2d.velocity.y); // Player Move
+
+            if (Input.GetKey(KeyCode.Space) && IS_GROUNDED) // Jump if Space bar is Pressed and Player is on Ground
+            {
+                JumpMovement();
+            }
+
         } else
         {
-            if(KnockFromRight = true)
+            if(KnockFromRight == true)
             {
                 rb2d.velocity = new Vector2(-KBForceX, KBForceY);
             }
@@ -86,12 +92,6 @@ public class PlayerMovement : MonoBehaviour
 
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
-
-        
-        if (Input.GetKey(KeyCode.Space) && IS_GROUNDED) // Jump if Space bar is Pressed and Player is on Ground
-        {
-            JumpMovement();
-        }
     }
 
     // For Mobile

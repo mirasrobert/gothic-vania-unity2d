@@ -13,6 +13,7 @@ public class PlayerHealth : MonoBehaviour
 
 
     Rigidbody2D rb;
+    [SerializeField] PlayerMovement playerMovementScript;
 
     // Start is called before the first frame update
     void Start()
@@ -35,15 +36,16 @@ public class PlayerHealth : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            playerMovementScript.enabled = false;
+            rb.velocity = new Vector2(0, 0);
             Die();
-        }
+        } 
 
     }
 
     void Die()
     {
         // Die Animation
-        rb.velocity = new Vector2(0, 0);
         animator.SetBool("IsDead", true);
         Debug.Log("Player is Dead");
     }
@@ -51,7 +53,7 @@ public class PlayerHealth : MonoBehaviour
     // This will be called on animation event after DIE animation is done
     public void DestroyObject()
     {
-        this.enabled = false;
-        //Destroy(this.gameObject);
+        //this.enabled = false;
+        Destroy(this.gameObject);
     }
 }

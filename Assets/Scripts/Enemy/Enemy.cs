@@ -8,11 +8,13 @@ public class Enemy : MonoBehaviour
     int currentHealth;
     public Animator animator;
 
+    Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void TakeDamage(int damage)
@@ -24,6 +26,7 @@ public class Enemy : MonoBehaviour
 
         if(currentHealth <= 0)
         {
+            rb.velocity = new Vector2(0, 0); // Stop Enemy from moving when dies
             Die();
         }
     }
