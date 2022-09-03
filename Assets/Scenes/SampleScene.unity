@@ -12190,7 +12190,7 @@ MonoBehaviour:
   groundCheckLeft: {fileID: 1545560908}
   groundCheckRight: {fileID: 1316451284}
   KBForceY: 1.5
-  KBForceX: 6
+  KBForceX: 6.5
   KBCounter: 0
   KBTotalTime: 0.3
   KnockFromRight: 0

@@ -21,10 +21,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform groundCheckRight;
 
     // Knockback
-    public float KBForceY;
-    public float KBForceX;
+    public float KBForceY = 1.5f;
+    public float KBForceX = 6f;
     public float KBCounter;
-    public float KBTotalTime;
+    public float KBTotalTime = 0.3f;
 
     public bool KnockFromRight;
 
