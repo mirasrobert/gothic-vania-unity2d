@@ -35,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(groundCheck == null || groundCheckLeft == null || groundCheckRight == null)
+        {
+            return;
+        }
+
         // Check if player is on ground or not
         if (Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Foreground")) ||
             Physics2D.Linecast(transform.position, groundCheckLeft.position, 1 << LayerMask.NameToLayer("Foreground")) ||

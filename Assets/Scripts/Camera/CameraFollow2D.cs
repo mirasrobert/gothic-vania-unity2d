@@ -11,10 +11,10 @@ public class CameraFollow2D : MonoBehaviour
     [SerializeField] Vector2 posOffset;
 
 
-    [SerializeField] float leftLimit;
-    [SerializeField] float rightLimit;
-    [SerializeField] float bottomLimit;
-    [SerializeField] float topLimit;
+    [SerializeField] float leftLimit = 0f;
+    [SerializeField] float rightLimit = 0f;
+    [SerializeField] float bottomLimit = 0f;
+    [SerializeField] float topLimit = 0f;
 
     private void Start()
     {

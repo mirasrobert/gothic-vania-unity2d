@@ -6,20 +6,57 @@ public class PlayerCombat : MonoBehaviour
 {
     public Animator animator;
 
-    const string PLAYER_ATTACK_ANIM = "Player_Attack_1";
+    public Transform attackPoint;
+    public LayerMask enemyLayers;
+
+    public float attackRange = 0.5f;
+    public int attackDamage = 1;
+
+
+    // 2f = 2 attack per second
+    public float attackRate = 2f;
+    float nextAttackTime = 0f;
+
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        // Prevent for spamming attack
+        if(Time.time >= nextAttackTime)
         {
-            Attack();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                PlayAttackAnimation();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
     }
 
-    public void Attack()
+    // This will be used on Animation Event
+    public void AttackEnemy()
     {
+        // Detect enemy in range of attack
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        // Damage enemy
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
+        }
+    }
+
+    void PlayAttackAnimation()
+    {
+        // Play an attack animation
         animator.SetTrigger("Attack");
+    }
+
+    private void OnDrawGizmosSelected ()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 }
  
